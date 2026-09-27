@@ -259,6 +259,7 @@
 
                   <button
                     v-if="currentUser?.peran_id_str === 'Admin'"
+                    @click="openEditModal(siswa)"
                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 transition"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -403,6 +404,111 @@
               Tutup
             </button>
           </div>
+        </div>
+      </div>
+    </Transition>
+
+    <!-- Edit Siswa Modal -->
+    <Transition name="modal">
+      <div
+        v-if="showEditModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 backdrop-blur-sm px-4 py-6"
+        @click.self="closeEditModal"
+      >
+        <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto">
+          <!-- Header -->
+          <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-indigo-50/60 to-violet-50/60">
+            <div>
+              <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">Data Siswa</p>
+              <h2 class="text-lg font-bold text-slate-900 mt-1">Edit Data Siswa</h2>
+            </div>
+
+            <button
+              @click="closeEditModal"
+              class="w-9 h-9 flex items-center justify-center rounded-lg text-slate-400 hover:bg-white hover:text-slate-600 transition"
+              aria-label="Tutup"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <form @submit.prevent="handleEditStudent" class="p-6 space-y-5">
+            <!-- Nama -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Nama Siswa</label>
+              <input
+                v-model="editStudent.nama"
+                type="text"
+                placeholder="Masukkan nama siswa"
+                required
+                :disabled="editLoading"
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none transition focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:opacity-60 disabled:cursor-not-allowed"
+              />
+            </div>
+
+            <!-- Kelas -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Kelas</label>
+              <input
+                v-model="editStudent.nama_rombel"
+                type="text"
+                placeholder="Contoh: KELAS 5A"
+                required
+                :disabled="editLoading"
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none transition focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:opacity-60 disabled:cursor-not-allowed"
+              />
+            </div>
+
+            <!-- Error -->
+            <div
+              v-if="editError"
+              class="flex items-start gap-3 p-3.5 rounded-xl bg-red-50 border border-red-100"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M10.29 3.86l-7.4 13a2 2 0 001.74 3h14.74a2 2 0 001.74 3l-7.4-13a2 2 0 001.74 3l-7.4-13a2 2 0 00-3.48 0z" />
+              </svg>
+              <p class="text-xs text-red-700 leading-relaxed">
+                {{ editError }}
+              </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
+              <button
+                type="button"
+                @click="closeEditModal"
+                :disabled="editLoading"
+                class="px-4 py-2.5 rounded-lg bg-slate-100 text-slate-700 text-sm font-semibold hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                Batal
+              </button>
+
+              <button
+                type="submit"
+                :disabled="editLoading"
+                class="inline-flex items-center justify-center gap-2 min-w-[120px] px-4 py-2.5 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold hover:shadow-md shadow-indigo-500/20 disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+              >
+                <span
+                  v-if="editLoading"
+                  class="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin"
+                ></span>
+                <svg
+                  v-else
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7-7" />
+                </svg>
+                {{ editLoading ? 'Menyimpan...' : 'Simpan Perubahan' }}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </Transition>
@@ -576,6 +682,16 @@ const detailError = ref('')
 
 const showAddModal = ref(false)
 
+const showEditModal = ref(false)
+const editLoading = ref(false)
+const editError = ref('')
+
+const editStudent = ref({
+  peserta_didik_id: '',
+  nama: '',
+  nama_rombel: '',
+})
+
 const newStudent = ref({
   nama: '',
   nisn: '',
@@ -730,6 +846,94 @@ const closeDetail = () => {
   showDetailModal.value = false
   selectedStudent.value = null
   detailError.value = ''
+}
+
+const openEditModal = (student) => {
+  editError.value = ''
+
+  editStudent.value = {
+    peserta_didik_id: student.peserta_didik_id || '',
+    nama: student.nama || '',
+    nama_rombel: student.nama_rombel || '',
+  }
+
+  showEditModal.value = true
+}
+
+const closeEditModal = () => {
+  if (editLoading.value) return
+
+  showEditModal.value = false
+  editError.value = ''
+
+  editStudent.value = {
+    peserta_didik_id: '',
+    nama: '',
+    nama_rombel: '',
+  }
+}
+
+const handleEditStudent = async () => {
+  editError.value = ''
+
+  const id = editStudent.value.peserta_didik_id
+  const nama = editStudent.value.nama.trim()
+  const namaRombel = editStudent.value.nama_rombel.trim()
+
+  if (!id) {
+    editError.value = 'ID siswa tidak ditemukan.'
+    return
+  }
+
+  if (!nama || !namaRombel) {
+    editError.value = 'Nama siswa dan kelas wajib diisi.'
+    return
+  }
+
+  editLoading.value = true
+
+  try {
+    await api.put(`/api/siswa/${id}`, {
+      nama,
+      nama_rombel: namaRombel,
+    })
+
+    // Update row yang sedang tampil tanpa perlu menunggu refresh halaman.
+    const index = students.value.findIndex(
+      (student) => student.peserta_didik_id === id
+    )
+
+    if (index !== -1) {
+      students.value[index] = {
+        ...students.value[index],
+        nama,
+        nama_rombel: namaRombel,
+      }
+    }
+
+    // Jika detail siswa sedang terbuka untuk siswa yang sama, ikut diperbarui.
+    if (
+      selectedStudent.value &&
+      selectedStudent.value.peserta_didik_id === id
+    ) {
+      selectedStudent.value = {
+        ...selectedStudent.value,
+        nama,
+        nama_rombel: namaRombel,
+      }
+    }
+
+    closeEditModal()
+  } catch (error) {
+    console.error('Gagal mengedit data siswa:', error)
+
+    editError.value =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      'Gagal menyimpan perubahan data siswa.'
+  } finally {
+    editLoading.value = false
+  }
 }
 
 const openAddModal = () => {

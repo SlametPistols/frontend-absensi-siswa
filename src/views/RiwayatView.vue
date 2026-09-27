@@ -611,6 +611,13 @@
         </div>
       </div>
 
+      <div
+        v-if="deleteError"
+        class="border-b border-red-100 bg-red-50 px-5 py-3 text-sm text-red-700 sm:px-6"
+      >
+        {{ deleteError }}
+      </div>
+
       <!-- Loading -->
       <div
         v-if="loading"
@@ -769,6 +776,12 @@
               >
                 Metode
               </th>
+              <th
+                v-if="currentUser?.peran_id_str === 'Admin'"
+                class="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-400"
+              >
+                Aksi
+              </th>
             </tr>
           </thead>
 
@@ -897,6 +910,59 @@
                   {{ row.metode || '-' }}
                 </span>
               </td>
+
+              <!-- Aksi -->
+              <td
+                v-if="currentUser?.peran_id_str === 'Admin'"
+                class="px-5 py-4"
+              >
+                <button
+                  type="button"
+                  @click="handleDeleteAttendance(row)"
+                  :disabled="deletingId === row.absensi_id"
+                  class="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <svg
+                    v-if="deletingId !== row.absensi_id"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m-4 0h14"
+                    />
+                  </svg>
+
+                  <svg
+                    v-else
+                    class="h-4 w-4 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    />
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+
+                  {{ deletingId === row.absensi_id ? 'Menghapus...' : 'Hapus' }}
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -975,12 +1041,15 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import api from '../services/api'
+import { currentUser } from '../services/authState'
 
 const rows = ref([])
 const summary = ref(null)
 
 const loading = ref(false)
 const errorMessage = ref('')
+const deletingId = ref('')
+const deleteError = ref('')
 
 const currentPage = ref(1)
 const totalPages = ref(1)
@@ -1056,6 +1125,42 @@ const fetchAttendance = async () => {
       'Gagal mengambil riwayat absensi.'
   } finally {
     loading.value = false
+  }
+}
+
+const handleDeleteAttendance = async (row) => {
+  if (!row?.absensi_id) return
+
+  const confirmed = window.confirm(
+    `Hapus riwayat absensi ${row.nama || 'siswa ini'}?`
+  )
+
+  if (!confirmed) return
+
+  deleteError.value = ''
+  deletingId.value = row.absensi_id
+
+  try {
+    await api.delete(`/api/absensi/${row.absensi_id}`)
+
+    rows.value = rows.value.filter(
+      (item) => item.absensi_id !== row.absensi_id
+    )
+
+    if (rows.value.length === 0 && currentPage.value > 1) {
+      currentPage.value--
+    }
+
+    await fetchAttendance()
+  } catch (error) {
+    console.error('Gagal menghapus riwayat absensi:', error)
+
+    deleteError.value =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      'Gagal menghapus riwayat absensi.'
+  } finally {
+    deletingId.value = ''
   }
 }
 
