@@ -1,5 +1,43 @@
 <template>
   <div class="flex h-screen overflow-hidden bg-slate-50">
+    <!-- Mobile Menu Button -->
+    <button
+      @click="sidebarOpen = !sidebarOpen"
+      class="fixed left-4 top-4 z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-900 md:hidden"
+      :aria-label="sidebarOpen ? 'Tutup menu' : 'Buka menu'"
+    >
+      <svg
+        v-if="!sidebarOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+
+      <svg
+        v-else
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
     <!-- Mobile Overlay -->
     <Transition name="fade">
       <div
@@ -401,7 +439,7 @@
     <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
       <!-- Content -->
       <main class="flex-1 overflow-y-auto bg-slate-50">
-        <div class="p-5 sm:p-6 lg:p-8">
+        <div class="p-5 pt-16 sm:p-6 sm:pt-6 lg:p-8">
           <!-- Breadcrumb -->
           <nav
             class="mb-5 flex items-center gap-1.5 text-xs text-slate-400"
