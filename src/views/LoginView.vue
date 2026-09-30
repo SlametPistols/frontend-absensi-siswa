@@ -1,82 +1,208 @@
 <template>
-  <div
-    class="min-h-screen bg-[#f0f2f5] flex items-center justify-center p-4"
-    style="font-family: Helvetica, Arial, sans-serif;"
-  >
-    <div class="w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+  <div class="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
       <!-- Left: Brand -->
-      <div class="flex-1 max-w-md text-center md:text-left">
-        <h1 class="text-[#1877f2] text-5xl md:text-6xl font-bold tracking-tight leading-none">
-          SiAbsen
-        </h1>
+      <div class="hidden md:block">
+        <div class="max-w-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v11a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 17.5v-11z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 9h8M8 12h5M8 15h3"
+                />
+              </svg>
+            </div>
 
-        <p class="mt-4 text-xl md:text-2xl text-[#1c1e21] leading-snug max-w-sm mx-auto md:mx-0">
-          Sistem informasi absensi siswa untuk sekolah, praktis dan mudah digunakan setiap hari.
-        </p>
+            <span class="text-xl font-semibold tracking-tight text-slate-900">
+              SiAbsen
+            </span>
+          </div>
+
+          <h1 class="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+            Sistem informasi absensi siswa yang sederhana dan terintegrasi.
+          </h1>
+
+          <p class="mt-4 max-w-md text-base leading-7 text-slate-500">
+            Kelola data siswa, pencatatan absensi, kartu siswa, dan kebutuhan
+            administrasi sekolah dalam satu sistem.
+          </p>
+        </div>
       </div>
 
-      <!-- Right: Login card -->
-      <div class="w-full max-w-[396px] shrink-0">
-        <div class="bg-white rounded-lg border border-[#dddfe2] shadow-[0_2px_4px_rgba(0,0,0,0.08),0_8px_16px_rgba(0,0,0,0.08)] p-4">
+      <!-- Right: Login -->
+      <div class="w-full max-w-md mx-auto md:mx-0 md:ml-auto">
+        <!-- Mobile Brand -->
+        <div class="flex items-center justify-center gap-2.5 mb-8 md:hidden">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v11a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 17.5v-11z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 9h8M8 12h5M8 15h3"
+              />
+            </svg>
+          </div>
 
-          <form @submit.prevent="handleLogin" class="space-y-3">
-            <input
-              id="username"
-              v-model="username"
-              type="text"
-              autocomplete="username"
-              placeholder="Username"
-              class="w-full h-[52px] px-4 border border-[#dddfe2] rounded-md text-[17px] text-[#1c1e21] placeholder:text-[#90949c] outline-none focus:border-[#1877f2] focus:ring-2 focus:ring-[#1877f2]/20 transition-colors"
-            />
+          <span class="text-xl font-semibold text-slate-900">
+            SiAbsen
+          </span>
+        </div>
 
-            <input
-              id="password"
-              v-model="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="Password"
-              class="w-full h-[52px] px-4 border border-[#dddfe2] rounded-md text-[17px] text-[#1c1e21] placeholder:text-[#90949c] outline-none focus:border-[#1877f2] focus:ring-2 focus:ring-[#1877f2]/20 transition-colors"
-            />
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+          <div class="mb-6">
+            <h2 class="text-xl font-semibold tracking-tight text-slate-900">
+              Masuk ke akun
+            </h2>
+
+            <p class="mt-1.5 text-sm text-slate-500">
+              Masukkan username dan password untuk melanjutkan.
+            </p>
+          </div>
+
+          <form @submit.prevent="handleLogin" class="space-y-4">
+
+            <!-- Username -->
+            <div>
+              <label
+                for="username"
+                class="mb-1.5 block text-sm font-medium text-slate-700"
+              >
+                Username
+              </label>
+
+              <input
+                id="username"
+                v-model="username"
+                type="text"
+                autocomplete="username"
+                placeholder="Masukkan username"
+                class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+              />
+            </div>
+
+            <!-- Password -->
+            <div>
+              <label
+                for="password"
+                class="mb-1.5 block text-sm font-medium text-slate-700"
+              >
+                Password
+              </label>
+
+              <input
+                id="password"
+                v-model="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Masukkan password"
+                class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+              />
+            </div>
 
             <!-- Error -->
             <div
               v-if="errorMessage"
-              class="flex items-start gap-2.5 px-3.5 py-3 rounded-md bg-[#fce6e8] border border-[#f5c2c7]"
+              class="flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 px-3.5 py-3"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0 text-[#e41e3f] mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z" clip-rule="evenodd" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="mt-0.5 h-4 w-4 shrink-0 text-red-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3m0 4h.01M10.29 3.86l-7.5 13A2 2 0 004.53 20h14.94a2 2 0 001.74-3.14l-7.5-13a2 2 0 00-3.42 0z"
+                />
               </svg>
-              <p class="text-sm text-[#601b21] leading-relaxed">{{ errorMessage }}</p>
+
+              <p class="text-sm leading-5 text-red-700">
+                {{ errorMessage }}
+              </p>
             </div>
 
+            <!-- Login Button -->
             <button
               type="submit"
               :disabled="loading"
-              class="w-full h-[48px] flex items-center justify-center gap-2 bg-[#1877f2] hover:bg-[#166fe5] text-white text-[20px] font-bold rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              class="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-semibold text-white transition hover:bg-indigo-700 active:bg-indigo-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <svg v-if="loading" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              <svg
+                v-if="loading"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 animate-spin"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="3"
+                />
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
               </svg>
-              <span>{{ loading ? 'Memproses...' : 'Masuk' }}</span>
+
+              <span>
+                {{ loading ? 'Memproses...' : 'Masuk' }}
+              </span>
             </button>
           </form>
 
-          <div class="text-center mt-4">
-            <span class="text-[#1877f2] text-sm hover:underline cursor-default">
+          <div class="mt-5 text-center">
+            <span class="text-sm text-indigo-600">
               Lupa password?
             </span>
           </div>
 
-          <hr class="my-5 border-t border-[#dadde1]" />
+          <div class="my-5 border-t border-slate-100"></div>
 
-          <p class="text-center text-xs text-[#606770] leading-relaxed">
+          <p class="text-center text-xs leading-5 text-slate-400">
             Hubungi admin sekolah jika lupa kata sandi atau belum memiliki akun.
           </p>
         </div>
 
-        <p class="text-center text-xs text-[#606770] mt-6">
+        <p class="mt-5 text-center text-xs text-slate-400">
           Sistem Informasi Absensi Siswa
         </p>
       </div>
