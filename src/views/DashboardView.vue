@@ -1,8 +1,6 @@
 
 <template>
-
   <div class="max-w-7xl mx-auto pb-10">
-
     <!-- Header -->
     <div class="mb-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
@@ -12,9 +10,7 @@
           </p>
         </div>
 
-        <div
-          class="inline-flex items-center gap-2 self-start sm:self-auto px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs font-medium text-slate-500 shadow-sm"
-        >
+        <div class="inline-flex items-center gap-2 self-start sm:self-auto px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs font-medium text-slate-500 shadow-sm">
           <span class="relative flex w-2 h-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full w-2 h-2 bg-emerald-500"></span>
@@ -34,13 +30,36 @@
           class="group flex min-h-24 flex-col items-center justify-center rounded-xl px-2 py-3 text-center transition duration-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
           <span class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-indigo-600 transition group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:-translate-y-0.5">
-            <svg v-if="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            <svg v-else-if="item.icon === 'card'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="2"/><path stroke-linecap="round" d="M6 15h4m4-5h4m-4 4h4"/></svg>
-            <svg v-else-if="item.icon === 'scan'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V5a1 1 0 011-1h3m8 0h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M7 9h10v6H7z"/><path stroke-linecap="round" d="M9 12h6"/></svg>
-            <svg v-else-if="item.icon === 'check'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2h-4M9 5a3 3 0 006 0M9 5a3 3 0 013-3 3 3 0 013 3m-8 9l2 2 4-4"/></svg>
-            <svg v-else-if="item.icon === 'history'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/></svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/></svg>
+            <svg v-if="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+
+            <svg v-else-if="item.icon === 'card'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <circle cx="8" cy="10" r="2"/>
+              <path stroke-linecap="round" d="M6 15h4m4-5h4m-4 4h4"/>
+            </svg>
+
+            <svg v-else-if="item.icon === 'scan'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V5a1 1 0 011-1h3m8 0h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M7 9h10v6H7z"/>
+              <path stroke-linecap="round" d="M9 12h6"/>
+            </svg>
+
+            <svg v-else-if="item.icon === 'check'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2h-4M9 5a3 3 0 006 0M9 5a3 3 0 013-3 3 3 0 013 3m-8 9l2 2 4-4"/>
+            </svg>
+
+            <svg v-else-if="item.icon === 'history'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/>
+            </svg>
+
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/>
+            </svg>
           </span>
+
           <span class="max-w-28 text-xs font-medium leading-4 text-slate-700 transition-colors group-hover:text-indigo-700">{{ item.label }}</span>
         </RouterLink>
       </nav>
@@ -55,6 +74,7 @@
           <div class="skeleton-shimmer h-2.5 w-24 rounded"></div>
         </div>
       </div>
+
       <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-9 h-9 rounded-full border-4 border-slate-200 border-t-indigo-500 animate-spin shrink-0"></div>
@@ -76,7 +96,7 @@
       <div class="flex items-start gap-4 relative">
         <div class="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-red-50 to-red-100 text-red-600 flex items-center justify-center ring-1 ring-red-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86l-7.4 13a2 2 0 001.74 3h14.74a2 2 0 001.74-3l-7.4-13a2 2 0 00-3.48 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86l-7.4 13a2 2 0 001.74 3h14.74a2 2 0 001.74-3l-7.4-13a2 2 0 00-3.48 0z"/>
           </svg>
         </div>
 
@@ -89,7 +109,7 @@
             class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium shadow-sm shadow-red-500/30 hover:shadow-md hover:from-red-700 hover:to-red-600 active:scale-[0.98] transition-all"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a8 8 0 0114.9-4M20 15a8 8 0 01-14.9 4" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a8 8 0 0114.9-4M20 15a8 8 0 01-14.9 4"/>
             </svg>
             Coba Lagi
           </button>
@@ -99,7 +119,6 @@
 
     <!-- Dashboard -->
     <div v-else class="animate-content-in">
-
       <!-- Primary Statistics -->
       <section>
         <div class="flex items-center justify-between mb-4">
@@ -109,23 +128,24 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <!-- Total -->
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-slate-200/60 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-400 to-indigo-600"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-indigo-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Total Siswa</p>
                 <p class="text-3xl font-bold tracking-tight text-slate-900 mt-3">{{ dashboard.total_siswa }}</p>
                 <p class="text-xs text-slate-400 mt-2">Siswa terdaftar</p>
               </div>
+
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
                 </svg>
               </div>
             </div>
@@ -135,15 +155,17 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-emerald-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-emerald-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Hadir</p>
                 <p class="text-3xl font-bold tracking-tight text-emerald-600 mt-3">{{ dashboard.hadir }}</p>
                 <p class="text-xs text-slate-400 mt-2">Hadir hari ini</p>
               </div>
+
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                 </svg>
               </div>
             </div>
@@ -153,16 +175,18 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-amber-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-400 to-amber-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-amber-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Terlambat</p>
                 <p class="text-3xl font-bold tracking-tight text-amber-500 mt-3">{{ dashboard.terlambat }}</p>
                 <p class="text-xs text-slate-400 mt-2">Perlu perhatian</p>
               </div>
+
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-400/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="9" />
-                  <path stroke-linecap="round" d="M12 7v5l3 2" />
+                  <circle cx="12" cy="12" r="9"/>
+                  <path stroke-linecap="round" d="M12 7v5l3 2"/>
                 </svg>
               </div>
             </div>
@@ -172,58 +196,41 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-red-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-400 to-red-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-red-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Tidak Hadir</p>
                 <p class="text-3xl font-bold tracking-tight text-red-500 mt-3">{{ dashboard.tidak_hadir }}</p>
                 <p class="text-xs text-slate-400 mt-2">Belum hadir</p>
               </div>
+
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-red-400 to-red-500 text-white flex items-center justify-center shadow-md shadow-red-400/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="9" />
-                  <path stroke-linecap="round" d="M9 9l6 6m0-6l-6 6" />
+                  <circle cx="12" cy="12" r="9"/>
+                  <path stroke-linecap="round" d="M9 9l6 6m0-6l-6 6"/>
                 </svg>
               </div>
             </div>
           </div>
-
-          <!-- Alpha -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-rose-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
-            <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-400 to-rose-500"></span>
-            <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-rose-50 group-hover:scale-110 transition-transform duration-300"></div>
-            <div class="flex items-start justify-between relative">
-              <div>
-                <p class="text-sm font-medium text-slate-500">Alpha</p>
-                <p class="text-3xl font-bold tracking-tight text-rose-500 mt-3">{{ dashboard.alpha ?? 0 }}</p>
-                <p class="text-xs text-slate-400 mt-2">Tanpa keterangan</p>
-              </div>
-              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 text-white flex items-center justify-center shadow-md shadow-rose-400/30">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="9" />
-                  <path stroke-linecap="round" d="M12 7v5m0 4h.01" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
       <!-- Secondary Statistics -->
       <section class="mt-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <!-- Izin -->
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
             <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-blue-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-center justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Izin</p>
                 <p class="text-2xl font-bold text-blue-600 mt-2">{{ dashboard.izin }}</p>
               </div>
+
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h6l4 4v12a2 2 0 01-2 2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h6l4 4v12a2 2 0 01-2 2z"/>
                 </svg>
               </div>
             </div>
@@ -232,20 +239,41 @@
           <!-- Sakit -->
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
             <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-purple-50 group-hover:scale-110 transition-transform duration-300"></div>
+
             <div class="flex items-center justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Sakit</p>
                 <p class="text-2xl font-bold text-purple-600 mt-2">{{ dashboard.sakit }}</p>
               </div>
+
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-purple-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/>
                 </svg>
               </div>
             </div>
           </div>
 
-          <!-- Persentase -->
+          <!-- Alpha -->
+<div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+  <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-rose-50 group-hover:scale-110 transition-transform duration-300"></div>
+
+  <div class="flex items-center justify-between relative">
+    <div>
+      <p class="text-sm font-medium text-slate-500">Alpha</p>
+      <p class="text-2xl font-bold text-rose-600 mt-2">{{ dashboard.alpha ?? 0 }}</p>
+    </div>
+
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 text-white flex items-center justify-center shadow-md shadow-rose-500/30">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="9" />
+        <path stroke-linecap="round" d="M12 7v5m0 4h.01" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+          <!-- Persentase Kehadiran -->
           <div class="relative rounded-2xl p-5 text-white overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-600 to-violet-700 shadow-lg shadow-indigo-500/30">
             <div class="absolute -right-8 -bottom-10 w-32 h-32 rounded-full bg-white/5"></div>
             <div class="absolute -right-4 -top-10 w-24 h-24 rounded-full bg-white/5"></div>
@@ -272,15 +300,20 @@
 
               <!-- Ring mini -->
               <svg viewBox="0 0 36 36" class="w-14 h-14 shrink-0 -rotate-90">
-                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3" />
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3"/>
                 <circle
-                  cx="18" cy="18" r="15.5" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                  cx="18"
+                  cy="18"
+                  r="15.5"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
                   :stroke-dasharray="`${Math.min(dashboard.persentase_hadir, 100) * 0.974} 200`"
                 />
               </svg>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -315,7 +348,7 @@
         <div v-else-if="trend.length === 0" class="py-12 text-center px-6">
           <div class="w-12 h-12 mx-auto rounded-xl bg-slate-100 flex items-center justify-center text-slate-400">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 16v-5m4 5V8m4 8V4" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 16v-5m4 5V8m4 8V4"/>
             </svg>
           </div>
           <p class="text-sm font-medium text-slate-700 mt-3">Belum ada data tren</p>
@@ -324,10 +357,10 @@
 
         <!-- Trend content -->
         <div v-else>
-          <!-- Mini bar chart (visual tambahan dari data yang sama) -->
+          <!-- Mini bar chart -->
           <div class="px-5 sm:px-6 pt-6 pb-2">
             <div class="flex items-end gap-3 h-28">
-              <div v-for="(item, index) in trend" :key="'bar-'+index" class="group/bar flex-1 flex flex-col items-center justify-end h-full">
+              <div v-for="(item, index) in trend" :key="'bar-' + index" class="group/bar flex-1 flex flex-col items-center justify-end h-full">
                 <div class="relative w-full flex-1 flex items-end">
                   <div
                     class="w-full max-w-[28px] mx-auto rounded-t-md bg-gradient-to-t from-indigo-500 to-violet-400 group-hover/bar:from-indigo-600 group-hover/bar:to-violet-500 transition-all duration-300"
@@ -374,7 +407,6 @@
           </div>
         </div>
       </section>
-
     </div>
   </div>
 </template>
@@ -443,9 +475,7 @@ const formatDate = (value) => {
   })
 }
 
-// --- murni untuk tampilan, tidak memengaruhi fetch/state di atas ---
-
-// label tanggal hari ini di header
+// Label tanggal hari ini di header
 const todayLabel = new Date().toLocaleDateString('id-ID', {
   weekday: 'long',
   day: 'numeric',
@@ -453,7 +483,7 @@ const todayLabel = new Date().toLocaleDateString('id-ID', {
   year: 'numeric',
 })
 
-// skala tinggi mini bar chart tren, diturunkan dari data trend yang sudah ada
+// Skala tinggi mini bar chart tren
 const maxHadir = computed(() => {
   if (!trend.value.length) return 1
   return Math.max(...trend.value.map((item) => item.hadir || 0), 1)
@@ -476,8 +506,15 @@ onMounted(() => {
 
 <style scoped>
 @keyframes content-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-content-in {
@@ -500,6 +537,8 @@ onMounted(() => {
 }
 
 @keyframes shimmer {
-  100% { transform: translateX(100%); }
+  100% {
+    transform: translateX(100%);
+  }
 }
 </style>
