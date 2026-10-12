@@ -5,17 +5,8 @@
     <div class="mb-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
         <div>
-          <p class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 mb-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-            Overview
-          </p>
-
-          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 bg-clip-text">
-            Dashboard
-          </h1>
-
-          <p class="text-sm text-slate-500 mt-2">
-            Ringkasan kehadiran siswa hari ini · {{ todayLabel }}
+          <p class="text-sm font-medium text-slate-500 mt-2">
+            {{ todayLabel }}
           </p>
         </div>
 
@@ -31,7 +22,26 @@
       </div>
     </div>
 
-    <!-- Loading (skeleton) -->
+
+      <!-- Navigasi Pintasan -->
+      <section class="mx-auto mb-8 w-full max-w-4xl">
+        <nav aria-label="Navigasi fitur" class="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6 sm:gap-x-5">
+          <RouterLink v-for="item in quickLinks" :key="item.label" :to="item.to"
+            class="group flex min-h-24 flex-col items-center justify-center rounded-xl px-2 py-3 text-center transition duration-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+            <span class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-indigo-600 transition group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:-translate-y-0.5">
+              <svg v-if="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              <svg v-else-if="item.icon === 'card'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="2"/><path stroke-linecap="round" d="M6 15h4m4-5h4m-4 4h4"/></svg>
+              <svg v-else-if="item.icon === 'scan'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V5a1 1 0 011-1h3m8 0h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M7 9h10v6H7z"/><path stroke-linecap="round" d="M9 12h6"/></svg>
+              <svg v-else-if="item.icon === 'check'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2h-4M9 5a3 3 0 006 0M9 5a3 3 0 013-3 3 3 0 013 3m-8 9l2 2 4-4"/></svg>
+              <svg v-else-if="item.icon === 'history'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/></svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/></svg>
+            </span>
+            <span class="max-w-28 text-xs font-medium leading-4 text-slate-700 transition-colors group-hover:text-indigo-700">{{ item.label }}</span>
+          </RouterLink>
+        </nav>
+      </section>
+
+        <!-- Loading (skeleton) -->
     <div v-if="loading" class="space-y-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div v-for="i in 4" :key="i" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm overflow-hidden relative">
@@ -92,7 +102,7 @@
         <div class="flex items-center justify-between mb-4">
           <div>
             <h2 class="text-sm font-semibold text-slate-900">Kehadiran Hari Ini</h2>
-            <p class="text-xs text-slate-500 mt-1">Statistik siswa berdasarkan status absensi.</p>
+            <p class="text-xs text-slate-500 mt-1"></p>
           </div>
         </div>
 
@@ -266,7 +276,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <h2 class="text-base font-semibold text-slate-900">Tren Absensi 7 Hari</h2>
-              <p class="text-sm text-slate-500 mt-1">Perbandingan kehadiran selama 7 hari terakhir.</p>
+              <p class="text-sm text-slate-500 mt-1"></p>
             </div>
 
             <div class="inline-flex items-center gap-2 text-xs font-medium text-slate-500">
@@ -437,6 +447,15 @@ const maxHadir = computed(() => {
   if (!trend.value.length) return 1
   return Math.max(...trend.value.map((item) => item.hadir || 0), 1)
 })
+
+const quickLinks = [
+  { label: 'Data Siswa', to: '/siswa', icon: 'users' },
+  { label: 'Kartu Siswa', to: '/kartu-siswa', icon: 'card' },
+  { label: 'Scanner QR', to: '/scanner', icon: 'scan' },
+  { label: 'Absensi Manual', to: '/absensi-manual', icon: 'check' },
+  { label: 'Riwayat Absensi', to: '/riwayat', icon: 'history' },
+  { label: 'Sinkronisasi Dapodik', to: '/sync-dapodik', icon: 'sync' },
+]
 
 onMounted(() => {
   fetchDashboard()
