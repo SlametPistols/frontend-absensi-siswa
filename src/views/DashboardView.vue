@@ -1,4 +1,6 @@
+
 <template>
+
   <div class="max-w-7xl mx-auto pb-10">
 
     <!-- Header -->
@@ -22,26 +24,29 @@
       </div>
     </div>
 
+    <!-- Navigasi Pintasan -->
+    <section class="mx-auto mb-8 w-full max-w-4xl">
+      <nav aria-label="Navigasi fitur" class="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6 sm:gap-x-5">
+        <RouterLink
+          v-for="item in quickLinks"
+          :key="item.label"
+          :to="item.to"
+          class="group flex min-h-24 flex-col items-center justify-center rounded-xl px-2 py-3 text-center transition duration-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+        >
+          <span class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-indigo-600 transition group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:-translate-y-0.5">
+            <svg v-if="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <svg v-else-if="item.icon === 'card'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="2"/><path stroke-linecap="round" d="M6 15h4m4-5h4m-4 4h4"/></svg>
+            <svg v-else-if="item.icon === 'scan'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V5a1 1 0 011-1h3m8 0h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M7 9h10v6H7z"/><path stroke-linecap="round" d="M9 12h6"/></svg>
+            <svg v-else-if="item.icon === 'check'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2h-4M9 5a3 3 0 006 0M9 5a3 3 0 013-3 3 3 0 013 3m-8 9l2 2 4-4"/></svg>
+            <svg v-else-if="item.icon === 'history'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/></svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/></svg>
+          </span>
+          <span class="max-w-28 text-xs font-medium leading-4 text-slate-700 transition-colors group-hover:text-indigo-700">{{ item.label }}</span>
+        </RouterLink>
+      </nav>
+    </section>
 
-      <!-- Navigasi Pintasan -->
-      <section class="mx-auto mb-8 w-full max-w-4xl">
-        <nav aria-label="Navigasi fitur" class="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6 sm:gap-x-5">
-          <RouterLink v-for="item in quickLinks" :key="item.label" :to="item.to"
-            class="group flex min-h-24 flex-col items-center justify-center rounded-xl px-2 py-3 text-center transition duration-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
-            <span class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-indigo-600 transition group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:-translate-y-0.5">
-              <svg v-if="item.icon === 'users'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-              <svg v-else-if="item.icon === 'card'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="10" r="2"/><path stroke-linecap="round" d="M6 15h4m4-5h4m-4 4h4"/></svg>
-              <svg v-else-if="item.icon === 'scan'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V5a1 1 0 011-1h3m8 0h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M7 9h10v6H7z"/><path stroke-linecap="round" d="M9 12h6"/></svg>
-              <svg v-else-if="item.icon === 'check'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2h-4M9 5a3 3 0 006 0M9 5a3 3 0 013-3 3 3 0 013 3m-8 9l2 2 4-4"/></svg>
-              <svg v-else-if="item.icon === 'history'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/></svg>
-              <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/></svg>
-            </span>
-            <span class="max-w-28 text-xs font-medium leading-4 text-slate-700 transition-colors group-hover:text-indigo-700">{{ item.label }}</span>
-          </RouterLink>
-        </nav>
-      </section>
-
-        <!-- Loading (skeleton) -->
+    <!-- Loading (skeleton) -->
     <div v-if="loading" class="space-y-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div v-for="i in 4" :key="i" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm overflow-hidden relative">
@@ -69,9 +74,7 @@
       <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-red-50/70 blur-2xl"></div>
 
       <div class="flex items-start gap-4 relative">
-        <div
-          class="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-red-50 to-red-100 text-red-600 flex items-center justify-center ring-1 ring-red-100"
-        >
+        <div class="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-red-50 to-red-100 text-red-600 flex items-center justify-center ring-1 ring-red-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86l-7.4 13a2 2 0 001.74 3h14.74a2 2 0 001.74-3l-7.4-13a2 2 0 00-3.48 0z" />
           </svg>
@@ -106,20 +109,18 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
 
           <!-- Total -->
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-slate-200/60 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-400 to-indigo-600"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-indigo-50 group-hover:scale-110 transition-transform duration-300"></div>
-
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Total Siswa</p>
                 <p class="text-3xl font-bold tracking-tight text-slate-900 mt-3">{{ dashboard.total_siswa }}</p>
                 <p class="text-xs text-slate-400 mt-2">Siswa terdaftar</p>
               </div>
-
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
@@ -134,14 +135,12 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-emerald-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-emerald-50 group-hover:scale-110 transition-transform duration-300"></div>
-
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Hadir</p>
                 <p class="text-3xl font-bold tracking-tight text-emerald-600 mt-3">{{ dashboard.hadir }}</p>
                 <p class="text-xs text-slate-400 mt-2">Hadir hari ini</p>
               </div>
-
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -154,14 +153,12 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-amber-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-400 to-amber-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-amber-50 group-hover:scale-110 transition-transform duration-300"></div>
-
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Terlambat</p>
                 <p class="text-3xl font-bold tracking-tight text-amber-500 mt-3">{{ dashboard.terlambat }}</p>
                 <p class="text-xs text-slate-400 mt-2">Perlu perhatian</p>
               </div>
-
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-400/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                   <circle cx="12" cy="12" r="9" />
@@ -175,18 +172,35 @@
           <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-red-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-400 to-red-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-red-50 group-hover:scale-110 transition-transform duration-300"></div>
-
             <div class="flex items-start justify-between relative">
               <div>
                 <p class="text-sm font-medium text-slate-500">Tidak Hadir</p>
                 <p class="text-3xl font-bold tracking-tight text-red-500 mt-3">{{ dashboard.tidak_hadir }}</p>
                 <p class="text-xs text-slate-400 mt-2">Belum hadir</p>
               </div>
-
               <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-red-400 to-red-500 text-white flex items-center justify-center shadow-md shadow-red-400/30">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                   <circle cx="12" cy="12" r="9" />
                   <path stroke-linecap="round" d="M9 9l6 6m0-6l-6 6" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alpha -->
+          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-rose-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+            <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-400 to-rose-500"></span>
+            <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-rose-50 group-hover:scale-110 transition-transform duration-300"></div>
+            <div class="flex items-start justify-between relative">
+              <div>
+                <p class="text-sm font-medium text-slate-500">Alpha</p>
+                <p class="text-3xl font-bold tracking-tight text-rose-500 mt-3">{{ dashboard.alpha ?? 0 }}</p>
+                <p class="text-xs text-slate-400 mt-2">Tanpa keterangan</p>
+              </div>
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 text-white flex items-center justify-center shadow-md shadow-rose-400/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="9" />
+                  <path stroke-linecap="round" d="M12 7v5m0 4h.01" />
                 </svg>
               </div>
             </div>
@@ -379,6 +393,7 @@ const dashboard = ref({
   izin: 0,
   sakit: 0,
   tidak_hadir: 0,
+  alpha: 0,
   persentase_hadir: 0,
 })
 
@@ -392,11 +407,9 @@ const fetchDashboard = async () => {
 
   try {
     const response = await api.get('/api/dashboard/ringkasan')
-
     dashboard.value = response.data.rows
   } catch (error) {
     console.error('Gagal mengambil dashboard:', error)
-
     errorMessage.value = 'Gagal mengambil data dashboard.'
   } finally {
     loading.value = false
@@ -409,13 +422,11 @@ const fetchTrend = async () => {
 
   try {
     const response = await api.get('/api/dashboard/tren')
-
     trend.value = Array.isArray(response.data.rows)
       ? response.data.rows
       : []
   } catch (error) {
     console.error('Gagal mengambil tren absensi:', error)
-
     trendError.value = 'Gagal mengambil data tren absensi.'
   } finally {
     trendLoading.value = false
@@ -468,6 +479,7 @@ onMounted(() => {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 .animate-content-in {
   animation: content-in 0.25s ease-out;
 }
@@ -477,6 +489,7 @@ onMounted(() => {
   overflow: hidden;
   background-color: #eef1f5;
 }
+
 .skeleton-shimmer::after {
   content: '';
   position: absolute;
@@ -485,6 +498,7 @@ onMounted(() => {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
   animation: shimmer 1.4s infinite;
 }
+
 @keyframes shimmer {
   100% { transform: translateX(100%); }
 }
