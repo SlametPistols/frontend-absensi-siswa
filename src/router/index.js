@@ -7,6 +7,7 @@ import ScannerView from '../views/ScannerView.vue'
 import RiwayatView from '../views/RiwayatView.vue'
 import ManualAbsensiView from '../views/ManualAbsensiView.vue'
 import SyncDapodikView from '../views/SyncDapodikView.vue'
+import PengaturanWhatsAppView from '../views/PengaturanWhatsAppView.vue'
 import { loadCurrentUser, currentUser } from '../services/authState'
 
 const router = createRouter({
@@ -81,6 +82,17 @@ const router = createRouter({
       path: '/sync-dapodik',
       name: 'sync-dapodik',
       component: SyncDapodikView,
+      meta: {
+        layout: 'app',
+        requiresAuth: true,
+        roles: ['Admin'],
+      },
+    },
+
+    {
+      path: '/pengaturan-whatsapp',
+      name: 'pengaturan-whatsapp',
+      component: PengaturanWhatsAppView,
       meta: {
         layout: 'app',
         requiresAuth: true,

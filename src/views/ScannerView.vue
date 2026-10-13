@@ -443,7 +443,7 @@
                 <span
                   class="text-right text-sm font-semibold text-slate-800"
                 >
-                  {{ formatTime(attendanceResult.waktu_absen) }}
+                  {{ attendanceResult.jam_absen || formatTime(attendanceResult.waktu_absen) }}
                 </span>
               </div>
 
@@ -457,7 +457,7 @@
                 <span
                   class="inline-flex rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700"
                 >
-                  {{ attendanceResult.status || '-' }}
+                  {{ attendanceResult.label_status || attendanceResult.status || '-' }}
                 </span>
               </div>
             </div>
@@ -612,10 +612,14 @@ const submitAttendance = async (kode) => {
       attendanceError.value = 'Siswa tidak ditemukan.'
     } else if (errorCode === 'INVALID_QR_CODE') {
       attendanceError.value = 'QR Code tidak valid.'
-    } else if (errorCode === 'SESSION_CLOSED') {
-      attendanceError.value = 'Sesi absensi sudah ditutup.'
-    } else if (errorCode === 'OUTSIDE_SCHEDULE') {
-      attendanceError.value = 'Saat ini di luar jadwal absensi.'
+    } else if (errorCode === 'OUTSIDE_ABSEN_HOURS') {
+      const data = error.response?.data?.data || {}
+      const buka = data.jam_buka || '06.00'
+      const batas = data.jam_batas_masuk || '07.00'
+      const tutup = data.jam_tutup || '08.00'
+      attendanceError.value = error.response?.data?.message || `Di luar jam absensi. Buka ${buka}, batas masuk ${batas}, tutup ${tutup}.`
+    } else if (errorCode === 'SESSION_CLOSED' || errorCode === 'OUTSIDE_SCHEDULE') {
+      attendanceError.value = error.response?.data?.message || 'Di luar jadwal absensi.'
     } else {
       attendanceError.value = 'Gagal mencatat absensi.'
     }

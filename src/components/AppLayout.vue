@@ -506,6 +506,11 @@ const menuItems = [
     roles: ['Admin'],
   },
   {
+    label: 'Pengaturan WhatsApp',
+    path: '/pengaturan-whatsapp',
+    roles: ['Admin'],
+  },
+  {
     label: 'Riwayat Absensi',
     path: '/riwayat',
     roles: ['Admin', 'Guru'],

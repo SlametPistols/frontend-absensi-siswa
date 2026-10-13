@@ -174,65 +174,11 @@
 
           <!-- Status -->
           <div>
-            <label
-              class="mb-2 block text-sm font-semibold text-slate-700"
-            >
-              Status
-            </label>
-
-            <div class="grid grid-cols-2 gap-3">
-              <!-- Izin -->
-              <label
-                class="relative flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition"
-                :class="
-                  form.status === 'Izin'
-                    ? 'border-indigo-200 bg-indigo-50'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                "
-              >
-                <input
-                  v-model="form.status"
-                  type="radio"
-                  value="Izin"
-                  class="h-4 w-4 border-slate-300 text-indigo-600 focus:ring-indigo-500"
-                />
-
-                <div>
-                  <p class="text-sm font-semibold text-slate-800">
-                    Izin
-                  </p>
-
-                  <p class="mt-0.5 text-xs text-slate-500">
-                    Siswa tidak hadir karena izin.
-                  </p>
-                </div>
-              </label>
-
-              <!-- Sakit -->
-              <label
-                class="relative flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition"
-                :class="
-                  form.status === 'Sakit'
-                    ? 'border-indigo-200 bg-indigo-50'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                "
-              >
-                <input
-                  v-model="form.status"
-                  type="radio"
-                  value="Sakit"
-                  class="h-4 w-4 border-slate-300 text-indigo-600 focus:ring-indigo-500"
-                />
-
-                <div>
-                  <p class="text-sm font-semibold text-slate-800">
-                    Sakit
-                  </p>
-
-                  <p class="mt-0.5 text-xs text-slate-500">
-                    Siswa tidak hadir karena sakit.
-                  </p>
-                </div>
+            <label class="mb-2 block text-sm font-semibold text-slate-700">Status</label>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <label v-for="item in statusOptions" :key="item.value" class="flex cursor-pointer items-center gap-3 rounded-xl border p-4 transition" :class="form.status === item.value ? 'border-indigo-200 bg-indigo-50' : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'">
+                <input v-model="form.status" type="radio" :value="item.value" class="h-4 w-4 border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                <span class="text-sm font-semibold text-slate-800">{{ item.label }}</span>
               </label>
             </div>
           </div>
@@ -244,16 +190,19 @@
             >
               Keterangan
               <span class="font-normal text-slate-400">
-                (opsional)
+                ({{ form.status === 'Tidak Hadir' ? 'wajib' : 'opsional' }})
               </span>
             </label>
 
-            <textarea
+            <select
               v-model="form.keterangan"
-              rows="4"
-              placeholder="Masukkan keterangan jika diperlukan..."
-              class="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
-            ></textarea>
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+            >
+              <option value="">Pilih keterangan (untuk Tidak Hadir wajib)</option>
+              <option value="Izin">Izin</option>
+              <option value="Sakit">Sakit</option>
+              <option value="Alpha">Alpha</option>
+            </select>
           </div>
 
           <!-- Error -->
@@ -526,6 +475,12 @@ const form = ref({
   keterangan: '',
 })
 
+const statusOptions = [
+  { value: 'Hadir', label: 'Hadir' },
+  { value: 'Terlambat', label: 'Terlambat' },
+  { value: 'Tidak Hadir', label: 'Tidak Hadir' },
+]
+
 const fetchStudents = async () => {
   studentsLoading.value = true
   errorMessage.value = ''
@@ -578,6 +533,11 @@ const handleSubmit = async () => {
 
   if (!form.value.status) {
     errorMessage.value = 'Status wajib dipilih.'
+    return
+  }
+
+  if (form.value.status === 'Tidak Hadir' && !['Izin', 'Sakit', 'Alpha'].includes(form.value.keterangan.trim())) {
+    errorMessage.value = 'Untuk status Tidak Hadir, keterangan wajib diisi dengan Izin, Sakit, atau Alpha.'
     return
   }
 

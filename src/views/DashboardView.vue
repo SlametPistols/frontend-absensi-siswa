@@ -22,9 +22,9 @@
 
     <!-- Navigasi Pintasan -->
     <section class="mx-auto mb-8 w-full max-w-4xl">
-      <nav aria-label="Navigasi fitur" class="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-6 sm:gap-x-5">
+      <nav aria-label="Navigasi fitur" class="grid grid-cols-3 gap-x-3 gap-y-4 sm:grid-cols-7 sm:gap-x-4">
         <RouterLink
-          v-for="item in quickLinks"
+          v-for="item in visibleQuickLinks"
           :key="item.label"
           :to="item.to"
           class="group flex min-h-24 flex-col items-center justify-center rounded-xl px-2 py-3 text-center transition duration-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
@@ -55,7 +55,11 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.36 2.36L3 7m0-4v4h4m5-1v6l4 2"/>
             </svg>
 
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+            <svg v-else-if="item.icon === 'whatsapp'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 11.5a8.5 8.5 0 01-12.6 7.4L3 20l1.2-4.6A8.5 8.5 0 1120.5 11.5z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.8 8.2c.2-.4.4-.4.7-.4h.4c.1 0 .3 0 .4.3l.6 1.4c.1.2.1.3 0 .5l-.4.5c-.1.1-.2.2 0 .4.2.4.7 1 1.4 1.4.4.2.7.3.9.1l.6-.7c.1-.2.3-.2.5-.1l1.3.6c.2.1.3.2.3.3 0 .2-.1 1-.7 1.4-.5.4-1.1.5-1.8.3-.7-.2-1.6-.6-2.6-1.5-.8-.7-1.4-1.6-1.6-2.3-.2-.7 0-1.4.3-1.8z" />
+              </svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 00-12-4L4 9m16 6l-3 2a7 7 0 01-12-4"/>
             </svg>
           </span>
@@ -152,7 +156,7 @@
           </div>
 
           <!-- Hadir -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-emerald-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+          <div role="button" tabindex="0" @click="openAttendanceList('Hadir')" @keydown.enter.prevent="openAttendanceList('Hadir')" @keydown.space.prevent="openAttendanceList('Hadir')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-emerald-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-emerald-50 group-hover:scale-110 transition-transform duration-300"></div>
 
@@ -172,7 +176,7 @@
           </div>
 
           <!-- Terlambat -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-amber-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+          <div role="button" tabindex="0" @click="openAttendanceList('Terlambat')" @keydown.enter.prevent="openAttendanceList('Terlambat')" @keydown.space.prevent="openAttendanceList('Terlambat')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-amber-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-400 to-amber-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-amber-50 group-hover:scale-110 transition-transform duration-300"></div>
 
@@ -193,7 +197,7 @@
           </div>
 
           <!-- Tidak Hadir -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-red-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+          <div role="button" tabindex="0" @click="openAttendanceList('Tidak Hadir')" @keydown.enter.prevent="openAttendanceList('Tidak Hadir')" @keydown.space.prevent="openAttendanceList('Tidak Hadir')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-red-200/50 hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
             <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-400 to-red-500"></span>
             <div class="absolute -right-6 -bottom-8 w-24 h-24 rounded-full bg-red-50 group-hover:scale-110 transition-transform duration-300"></div>
 
@@ -219,7 +223,7 @@
       <section class="mt-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <!-- Izin -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+          <div role="button" tabindex="0" @click="openAttendanceList('Izin')" @keydown.enter.prevent="openAttendanceList('Izin')" @keydown.space.prevent="openAttendanceList('Izin')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
             <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-blue-50 group-hover:scale-110 transition-transform duration-300"></div>
 
             <div class="flex items-center justify-between relative">
@@ -237,7 +241,7 @@
           </div>
 
           <!-- Sakit -->
-          <div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+          <div role="button" tabindex="0" @click="openAttendanceList('Sakit')" @keydown.enter.prevent="openAttendanceList('Sakit')" @keydown.space.prevent="openAttendanceList('Sakit')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
             <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-purple-50 group-hover:scale-110 transition-transform duration-300"></div>
 
             <div class="flex items-center justify-between relative">
@@ -255,7 +259,7 @@
           </div>
 
           <!-- Alpha -->
-<div class="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+<div role="button" tabindex="0" @click="openAttendanceList('Alpha')" @keydown.enter.prevent="openAttendanceList('Alpha')" @keydown.space.prevent="openAttendanceList('Alpha')" class="group relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
   <div class="absolute -right-6 -bottom-8 w-20 h-20 rounded-full bg-rose-50 group-hover:scale-110 transition-transform duration-300"></div>
 
   <div class="flex items-center justify-between relative">
@@ -314,6 +318,18 @@
               </svg>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Ringkasan tambahan dari API terbaru -->
+      <section class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-sm font-medium text-slate-500">Sudah Absen</p>
+          <p class="mt-2 text-2xl font-bold text-emerald-600">{{ dashboard.sudah_absen ?? ((dashboard.hadir || 0) + (dashboard.terlambat || 0)) }}</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-sm font-medium text-slate-500">Belum Absen</p>
+          <p class="mt-2 text-2xl font-bold text-amber-600">{{ dashboard.belum_absen ?? 0 }}</p>
         </div>
       </section>
 
@@ -409,14 +425,130 @@
       </section>
     </div>
   </div>
+
+
+    <!-- Modal daftar siswa dari kartu statistik -->
+    <div v-if="attendanceModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-3 sm:p-6" @click.self="closeAttendanceList" @keydown.esc="closeAttendanceList">
+      <section role="dialog" aria-modal="true" :aria-label="`Daftar siswa ${attendanceModalCategory}`" class="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <header class="flex items-start justify-between gap-4 border-b border-slate-200 px-5 py-4 sm:px-6">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Daftar Siswa: {{ attendanceModalCategory }}</h2>
+            <p class="mt-1 text-sm text-slate-500">Absensi tanggal {{ todayLabel }}</p>
+            <p class="mt-1 text-xs text-slate-400">{{ attendanceTotal }} siswa</p>
+          </div>
+          <button type="button" @click="closeAttendanceList" aria-label="Tutup" class="rounded-lg px-3 py-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900">✕</button>
+        </header>
+
+        <div class="min-h-0 flex-1 overflow-auto p-4 sm:p-6">
+          <div v-if="attendanceLoading" class="py-12 text-center text-sm text-slate-500">Memuat daftar siswa...</div>
+          <div v-else-if="attendanceError" class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            {{ attendanceError }}
+            <button type="button" @click="fetchAttendanceList" class="ml-2 font-semibold underline">Coba lagi</button>
+          </div>
+          <div v-else-if="attendanceRows.length === 0" class="py-12 text-center">
+            <p class="font-semibold text-slate-700">Belum ada siswa dalam kategori ini</p>
+            <p class="mt-1 text-sm text-slate-500">Data akan muncul jika absensi hari ini tersedia.</p>
+          </div>
+          <div v-else class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-sm">
+              <thead class="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr><th class="px-4 py-3">Nama siswa</th><th class="px-4 py-3">Kelas</th><th class="px-4 py-3">Status</th><th class="px-4 py-3">Jam</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 bg-white">
+                <tr v-for="(row, index) in attendanceRows" :key="row.absensi_id || row.peserta_didik_id || index" class="hover:bg-slate-50">
+                  <td class="px-4 py-3"><p class="font-medium text-slate-800">{{ row.nama || '-' }}</p><p class="mt-0.5 text-xs text-slate-400">NISN: {{ row.nisn || '-' }}</p></td>
+                  <td class="px-4 py-3 text-slate-600">{{ row.nama_rombel || '-' }}</td>
+                  <td class="px-4 py-3"><span class="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">{{ row.keterangan || row.label_status || row.status || '-' }}</span></td>
+                  <td class="whitespace-nowrap px-4 py-3 text-slate-600">{{ formatAttendanceTime(row.waktu_absen || row.jam_absen) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <footer v-if="attendanceTotalPages > 1" class="flex items-center justify-between border-t border-slate-200 px-5 py-3">
+          <span class="text-xs text-slate-500">Halaman {{ attendancePage }} dari {{ attendanceTotalPages }}</span>
+          <div class="flex gap-2">
+            <button type="button" :disabled="attendancePage <= 1 || attendanceLoading" @click="attendancePage--; fetchAttendanceList()" class="rounded-lg border border-slate-200 px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-40">Sebelumnya</button>
+            <button type="button" :disabled="attendancePage >= attendanceTotalPages || attendanceLoading" @click="attendancePage++; fetchAttendanceList()" class="rounded-lg border border-slate-200 px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-40">Berikutnya</button>
+          </div>
+        </footer>
+      </section>
+    </div>
+
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import api from '../services/api'
+import { currentUser } from '../services/authState'
 
 const loading = ref(true)
 const errorMessage = ref('')
+
+// Modal daftar siswa berdasarkan kategori kartu dashboard.
+const attendanceModalOpen = ref(false)
+const attendanceModalCategory = ref('Hadir')
+const attendanceRows = ref([])
+const attendanceLoading = ref(false)
+const attendanceError = ref('')
+const attendancePage = ref(1)
+const attendanceTotalPages = ref(1)
+const attendanceTotal = ref(0)
+
+const getTodayWIB = () => new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(new Date())
+
+const categoryParams = (category) => {
+  if (category === 'Hadir') return { status: 'Hadir' }
+  if (category === 'Terlambat') return { status: 'Terlambat' }
+  if (category === 'Izin') return { keterangan: 'Izin' }
+  if (category === 'Sakit') return { keterangan: 'Sakit' }
+  if (category === 'Alpha') return { keterangan: 'Alpha' }
+  return { status: 'Tidak Hadir' }
+}
+
+const openAttendanceList = async (category) => {
+  attendanceModalCategory.value = category
+  attendanceModalOpen.value = true
+  attendancePage.value = 1
+  await fetchAttendanceList()
+}
+
+const fetchAttendanceList = async () => {
+  attendanceLoading.value = true
+  attendanceError.value = ''
+  try {
+    const today = getTodayWIB()
+    const response = await api.get('/api/absensi', {
+      params: {
+        tanggal_mulai: today,
+        tanggal_selesai: today,
+        page: attendancePage.value,
+        limit: 50,
+        ...categoryParams(attendanceModalCategory.value),
+      },
+    })
+    attendanceRows.value = response.data.rows || []
+    attendanceTotal.value = response.data.pagination?.total ?? response.data.results ?? attendanceRows.value.length
+    attendanceTotalPages.value = Math.max(1, response.data.pagination?.total_pages || Math.ceil(attendanceTotal.value / 50))
+  } catch (error) {
+    console.error('Gagal mengambil daftar absensi:', error)
+    attendanceRows.value = []
+    attendanceError.value = error.response?.data?.message || error.response?.data?.error || 'Gagal memuat daftar siswa. Coba lagi.'
+  } finally {
+    attendanceLoading.value = false
+  }
+}
+
+const closeAttendanceList = () => {
+  attendanceModalOpen.value = false
+}
+
+const formatAttendanceTime = (value) => {
+  if (!value) return '-'
+  return new Date(value).toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' })
+}
 
 const dashboard = ref({
   total_siswa: 0,
@@ -426,7 +558,11 @@ const dashboard = ref({
   sakit: 0,
   tidak_hadir: 0,
   alpha: 0,
+  sudah_absen: 0,
+  belum_absen: 0,
+  total_tidak_hadir: 0,
   persentase_hadir: 0,
+  persentase_tidak_hadir: 0,
 })
 
 const trend = ref([])
@@ -439,7 +575,8 @@ const fetchDashboard = async () => {
 
   try {
     const response = await api.get('/api/dashboard/ringkasan')
-    dashboard.value = response.data.rows
+    const data = response.data.rows || {}
+    dashboard.value = { ...dashboard.value, ...data, alpha: data.alpha ?? data.alfa ?? 0 }
   } catch (error) {
     console.error('Gagal mengambil dashboard:', error)
     errorMessage.value = 'Gagal mengambil data dashboard.'
@@ -496,7 +633,12 @@ const quickLinks = [
   { label: 'Absensi Manual', to: '/absensi-manual', icon: 'check' },
   { label: 'Riwayat Absensi', to: '/riwayat', icon: 'history' },
   { label: 'Sinkronisasi Dapodik', to: '/sync-dapodik', icon: 'sync' },
+  { label: 'Pengaturan WhatsApp', to: '/pengaturan-whatsapp', icon: 'whatsapp', adminOnly: true },
 ]
+
+const visibleQuickLinks = computed(() =>
+  quickLinks.filter((item) => !item.adminOnly || currentUser.value?.peran_id_str === 'Admin'),
+)
 
 onMounted(() => {
   fetchDashboard()

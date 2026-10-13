@@ -194,6 +194,25 @@
             </div>
           </div>
 
+          <!-- Filter kelas / tingkat untuk peserta didik -->
+          <div v-if="form.tipe === 'peserta_didik'" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-700">Filter kelas (opsional)</label>
+              <select v-model="form.kelas" :disabled="syncing" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+                <option value="">Semua kelas</option>
+                <option v-for="kelas in kelasDapodik" :key="kelas.nama_rombel" :value="kelas.nama_rombel">{{ kelas.nama_rombel }} — {{ kelas.jumlah_dapodik }} siswa</option>
+              </select>
+              <p v-if="kelasLoading" class="mt-1 text-xs text-slate-400">Memuat daftar kelas...</p>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-700">Atau tingkat (opsional)</label>
+              <select v-model="form.tingkat" :disabled="syncing || !!form.kelas" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+                <option value="">Semua tingkat</option>
+                <option v-for="tingkat in [1,2,3,4,5,6]" :key="tingkat" :value="String(tingkat)">Kelas {{ tingkat }}</option>
+              </select>
+            </div>
+          </div>
+
           <!-- Ngrok URL -->
           <div>
             <label
@@ -784,12 +803,14 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount } from 'vue'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
 import api from '../services/api'
 
 const form = ref({
   npsn: '',
   tipe: 'all',
+  kelas: '',
+  tingkat: '',
   ngrok_url: '',
   token: '',
 })
@@ -797,6 +818,18 @@ const form = ref({
 const syncing = ref(false)
 const errorMessage = ref('')
 const syncData = ref(null)
+const kelasDapodik = ref([])
+const kelasLoading = ref(false)
+
+const fetchKelasDapodik = async () => {
+  kelasLoading.value = true
+  try {
+    const response = await api.get('/api/sync/dapodik/kelas-dapodik')
+    kelasDapodik.value = Array.isArray(response.data.rows) ? response.data.rows : []
+  } catch (error) {
+    console.error('Gagal mengambil daftar kelas Dapodik:', error)
+  } finally { kelasLoading.value = false }
+}
 
 let pollingTimer = null
 
@@ -827,6 +860,8 @@ const startSync = async () => {
       ngrok_url: form.value.ngrok_url,
       token: form.value.token,
       tipe: form.value.tipe,
+      ...(form.value.tipe === 'peserta_didik' && form.value.kelas ? { kelas: form.value.kelas } : {}),
+      ...(form.value.tipe === 'peserta_didik' && !form.value.kelas && form.value.tingkat ? { tingkat: form.value.tingkat } : {}),
     })
 
     syncData.value = response.data.rows
@@ -878,6 +913,8 @@ const stopPolling = () => {
     pollingTimer = null
   }
 }
+
+onMounted(fetchKelasDapodik)
 
 onBeforeUnmount(() => {
   stopPolling()
