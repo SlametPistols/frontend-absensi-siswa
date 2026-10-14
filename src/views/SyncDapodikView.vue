@@ -749,6 +749,25 @@
               </p>
             </div>
           </div>
+
+          <!-- Daftar siswa yang gagal diproses (jika dikirim backend) -->
+          <div
+            v-if="failedStudentList.length"
+            class="mt-5 overflow-hidden rounded-xl border border-red-200 bg-white"
+          >
+            <div class="border-b border-red-100 bg-red-50 px-4 py-3">
+              <h3 class="text-sm font-semibold text-red-800">Daftar siswa gagal diproses</h3>
+              <p class="mt-1 text-xs text-red-700">{{ failedStudentList.length }} data dilaporkan gagal oleh backend.</p>
+            </div>
+            <div class="max-h-72 overflow-auto">
+              <ul class="divide-y divide-slate-100">
+                <li v-for="(item, index) in failedStudentList" :key="item.peserta_didik_id || item.id || item.nisn || index" class="px-4 py-3">
+                  <p class="text-sm font-medium text-slate-800">{{ failedStudentName(item) }}</p>
+                  <p v-if="failedStudentDetail(item)" class="mt-1 text-xs leading-5 text-red-700">{{ failedStudentDetail(item) }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <!-- Error -->
@@ -803,7 +822,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount, onMounted } from 'vue'
+import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
 import api from '../services/api'
 
 const form = ref({
@@ -820,6 +839,23 @@ const errorMessage = ref('')
 const syncData = ref(null)
 const kelasDapodik = ref([])
 const kelasLoading = ref(false)
+
+// Backend baru mengirim daftar kegagalan pada rincian peserta_didik.
+// Fallback top-level menjaga kompatibilitas dengan bentuk respons lain yang terdokumentasi.
+const failedStudentList = computed(() => {
+  const list = syncData.value?.peserta_didik?.daftar_gagal ?? syncData.value?.daftar_gagal
+  return Array.isArray(list) ? list : []
+})
+
+const failedStudentName = (item) => {
+  if (typeof item === 'string') return item
+  return item?.nama || item?.nama_siswa || item?.nisn || item?.peserta_didik_id || item?.id || 'Data siswa tanpa nama'
+}
+
+const failedStudentDetail = (item) => {
+  if (typeof item === 'string') return ''
+  return item?.message || item?.pesan || item?.error || item?.alasan || item?.detail || ''
+}
 
 const fetchKelasDapodik = async () => {
   kelasLoading.value = true

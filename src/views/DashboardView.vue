@@ -439,7 +439,7 @@
 
                 <p class="text-sm font-medium text-slate-500">Tidak Hadir</p>
 
-                <p class="text-3xl font-bold tracking-tight text-red-500 mt-3">{{ dashboard.tidak_hadir }}</p>
+                <p class="text-3xl font-bold tracking-tight text-red-500 mt-3">{{ dashboard.total_tidak_hadir ?? dashboard.tidak_hadir ?? 0 }}</p>
 
                 <p class="text-xs text-slate-400 mt-2">Belum hadir</p>
 
@@ -925,7 +925,7 @@
 
                   <td class="px-4 py-3"><span class="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">{{ row.keterangan || row.label_status || row.status || '-' }}</span></td>
 
-                  <td class="whitespace-nowrap px-4 py-3 text-slate-600">{{ formatAttendanceTime(row.waktu_absen || row.jam_absen) }}</td>
+                  <td class="whitespace-nowrap px-4 py-3 text-slate-600">{{ formatAttendanceTime(row.jam_absen || row.waktu_absen) }}</td>
 
                 </tr>
 
@@ -1125,6 +1125,9 @@ const closeAttendanceList = () => {
 const formatAttendanceTime = (value) => {
 
   if (!value) return '-'
+
+  // jam_absen sudah berupa HH:MM WIB dari backend; jangan diproses ulang sebagai Date.
+  if (typeof value === 'string' && /^\d{2}:\d{2}$/.test(value)) return value
 
   return new Date(value).toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' })
 

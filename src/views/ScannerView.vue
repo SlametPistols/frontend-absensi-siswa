@@ -39,6 +39,37 @@
       </div>
     </div>
 
+    <!-- Jadwal Absensi -->
+    <section class="rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5">
+      <div class="flex items-start gap-3">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2" />
+          </svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h2 class="text-sm font-semibold text-amber-900">Jadwal Absensi</h2>
+          <p class="mt-1 text-sm text-amber-800">Jam mengikuti konfigurasi backend sekolah (WIB).</p>
+          <div class="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div class="rounded-lg border border-amber-200/80 bg-white/80 px-3 py-2">
+              <p class="text-xs text-slate-500">06.00–sebelum 07.00</p>
+              <p class="mt-0.5 text-sm font-semibold text-emerald-700">Hadir</p>
+            </div>
+            <div class="rounded-lg border border-amber-200/80 bg-white/80 px-3 py-2">
+              <p class="text-xs text-slate-500">07.00–sebelum 08.00</p>
+              <p class="mt-0.5 text-sm font-semibold text-amber-700">Terlambat</p>
+            </div>
+            <div class="rounded-lg border border-amber-200/80 bg-white/80 px-3 py-2">
+              <p class="text-xs text-slate-500">Sebelum 06.00 atau mulai 08.00</p>
+              <p class="mt-0.5 text-sm font-semibold text-red-700">Scan ditolak</p>
+            </div>
+          </div>
+          <p class="mt-2 text-xs leading-5 text-amber-800">Siswa yang belum tercatat saat jam absensi ditutup akan ditandai Alpha oleh sistem.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Main Grid -->
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <!-- Scanner Card -->
@@ -614,12 +645,12 @@ const submitAttendance = async (kode) => {
       attendanceError.value = 'QR Code tidak valid.'
     } else if (errorCode === 'OUTSIDE_ABSEN_HOURS') {
       const data = error.response?.data?.data || {}
-      const buka = data.jam_buka || '06.00'
-      const batas = data.jam_batas_masuk || '07.00'
-      const tutup = data.jam_tutup || '08.00'
-      attendanceError.value = error.response?.data?.message || `Di luar jam absensi. Buka ${buka}, batas masuk ${batas}, tutup ${tutup}.`
-    } else if (errorCode === 'SESSION_CLOSED' || errorCode === 'OUTSIDE_SCHEDULE') {
-      attendanceError.value = error.response?.data?.message || 'Di luar jadwal absensi.'
+      const buka = data.jam_buka || '06:00'
+      const batas = data.jam_batas_masuk || '07:00'
+      const tutup = data.jam_tutup || '08:00'
+      attendanceError.value =
+        error.response?.data?.message ||
+        `Di luar jam absensi. Jam buka ${buka}, batas keterlambatan ${batas}, dan jam tutup ${tutup} WIB.`
     } else {
       attendanceError.value = 'Gagal mencatat absensi.'
     }
