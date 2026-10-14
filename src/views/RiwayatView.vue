@@ -1227,7 +1227,7 @@
 
                   class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold"
 
-                  :class="statusClass(row.status)"
+                  :class="statusClass(row)"
 
                 >
 
@@ -1235,11 +1235,11 @@
 
                     class="h-1.5 w-1.5 rounded-full"
 
-                    :class="statusDotClass(row.status)"
+                    :class="statusDotClass(row)"
 
                   ></span>
 
-                  {{ row.label_status || row.status }}
+                  {{ attendanceBadgeLabel(row) }}
 
                 </span>
 
@@ -2154,64 +2154,42 @@ const nextPage = async () => {
 
 }
 
-const statusClass = (status) => {
+const getAttendanceBadgeType = (row) => {
+  const status = String(row?.status || row?.label_status || '').trim().toLowerCase()
+  const keterangan = String(row?.keterangan || '').trim().toLowerCase()
 
-  if (status === 'Hadir') {
-
-    return 'bg-emerald-50 text-emerald-700'
-
-  }
-
-  if (status === 'Terlambat') {
-
-    return 'bg-amber-50 text-amber-700'
-
-  }
-
-  if (status === 'Izin') {
-
-    return 'bg-blue-50 text-blue-700'
-
-  }
-
-  if (status === 'Sakit') {
-
-    return 'bg-purple-50 text-purple-700'
-
-  }
-
-  return 'bg-red-50 text-red-700'
-
+  if (keterangan === 'izin') return 'izin'
+  if (keterangan === 'sakit') return 'sakit'
+  if (keterangan === 'alpha') return 'alpha'
+  if (status === 'hadir') return 'hadir'
+  if (status === 'terlambat') return 'terlambat'
+  return 'tidak-hadir'
 }
 
-const statusDotClass = (status) => {
-
-  if (status === 'Hadir') {
-
-    return 'bg-emerald-500'
-
+const attendanceBadgeLabel = (row) => {
+  const keterangan = String(row?.keterangan || '').trim()
+  if (['Izin', 'Sakit', 'Alpha'].includes(keterangan.toLowerCase().replace(/^./, (c) => c.toUpperCase()))) {
+    return keterangan.charAt(0).toUpperCase() + keterangan.slice(1).toLowerCase()
   }
+  return row?.label_status || row?.status || '-'
+}
 
-  if (status === 'Terlambat') {
+const statusClass = (row) => {
+  const type = getAttendanceBadgeType(row)
+  if (type === 'hadir') return 'bg-emerald-50 text-emerald-700'
+  if (type === 'terlambat') return 'bg-amber-50 text-amber-700'
+  if (type === 'izin') return 'bg-blue-50 text-blue-700'
+  if (type === 'sakit') return 'bg-purple-50 text-purple-700'
+  return 'bg-red-50 text-red-700'
+}
 
-    return 'bg-amber-500'
-
-  }
-
-  if (status === 'Izin') {
-
-    return 'bg-blue-500'
-
-  }
-
-  if (status === 'Sakit') {
-
-    return 'bg-purple-500'
-
-  }
-
+const statusDotClass = (row) => {
+  const type = getAttendanceBadgeType(row)
+  if (type === 'hadir') return 'bg-emerald-500'
+  if (type === 'terlambat') return 'bg-amber-500'
+  if (type === 'izin') return 'bg-blue-500'
+  if (type === 'sakit') return 'bg-purple-500'
   return 'bg-red-500'
-
 }
 
 onMounted(() => {

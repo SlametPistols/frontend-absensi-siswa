@@ -550,7 +550,6 @@ const handleSubmit = async () => {
       keterangan: form.value.keterangan,
     })
 
-    console.log('Absensi manual berhasil:', response.data)
 
     successMessage.value = 'Absensi berhasil disimpan.'
 
@@ -560,9 +559,6 @@ const handleSubmit = async () => {
       keterangan: '',
     }
   } catch (error) {
-    console.error('STATUS:', error.response?.status)
-    console.error('RESPONSE:', error.response?.data)
-    console.error('FULL ERROR:', error)
 
     const errorCode = error.response?.data?.error_code
 

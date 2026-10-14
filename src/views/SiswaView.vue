@@ -88,7 +88,7 @@
               class="appearance-none w-full px-4 pr-10 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 outline-none transition-all focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <option value="">Semua Kelas</option>
-              <option v-for="kelas in classes" :key="getClassValue(kelas)" :value="getClassValue(kelas)">
+              <option v-for="kelas in classes" :key="getClassName(kelas)" :value="getClassName(kelas)">
                 {{ getClassName(kelas) }}
                 <span v-if="kelas.jumlah_siswa != null">({{ kelas.jumlah_siswa }})</span>
               </option>
@@ -713,17 +713,12 @@ const getClassName = (kelas) => {
   )
 }
 
-const getClassValue = (kelas) => {
-  return getClassName(kelas)
-}
-
 const fetchClasses = async () => {
   classesLoading.value = true
 
   try {
     const response = await api.get('/api/kelas')
 
-    console.log('Response kelas:', response.data)
 
     const rows =
       response.data.rows ||
@@ -763,13 +758,11 @@ const fetchStudents = async (page = 1) => {
       params.tingkat = selectedLevel.value
     }
 
-    console.log('Request siswa:', params)
 
     const response = await api.get('/api/siswa', {
       params,
     })
 
-    console.log('Response siswa:', response.data)
 
     students.value = response.data.rows || []
 
@@ -824,7 +817,6 @@ const fetchStudentDetail = async (id) => {
   try {
     const response = await api.get(`/api/siswa/${id}`)
 
-    console.log('Response detail siswa:', response.data)
 
     selectedStudent.value = response.data.rows
   } catch (error) {
@@ -945,7 +937,6 @@ const closeAddModal = () => {
 }
 
 const handleAddStudent = () => {
-  console.log('Data form tambah siswa:', newStudent.value)
 
   alert('Form UI sudah dibuat. POST API belum dihubungkan.')
 }

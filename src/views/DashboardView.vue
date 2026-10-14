@@ -1045,9 +1045,10 @@ const fetchAttendanceList = async () => {
     const today = getTodayWIB()
     const category = attendanceModalCategory.value
 
-    // Dua kartu ringkasan perlu difilter dari seluruh data hari ini,
-    // bukan memakai filter fallback "Tidak Hadir" yang sama.
-    if (category === 'Sudah Absen' || category === 'Belum Absen') {
+    // Sudah Absen dihitung dari seluruh record hari ini. Kategori Belum Absen
+    // sengaja mengikuti filter Alpha sesuai perilaku UI yang diminta.
+    if (category === 'Sudah Absen') {
+
       const firstResponse = await api.get('/api/absensi', {
         params: {
           tanggal_mulai: today,
@@ -1075,13 +1076,7 @@ const fetchAttendanceList = async () => {
       const normalize = (value) => String(value || '').trim().toLowerCase()
       const filteredRows = allRows.filter((row) => {
         const status = normalize(row.status || row.label_status)
-        const keterangan = normalize(row.keterangan)
-
-        if (category === 'Sudah Absen') {
-          return status === 'hadir' || status === 'terlambat'
-        }
-
-        return status === 'tidak hadir' && keterangan === 'alpha'
+        return status === 'hadir' || status === 'terlambat'
       })
 
       attendanceTotal.value = filteredRows.length

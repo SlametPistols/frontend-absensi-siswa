@@ -110,6 +110,12 @@ const router = createRouter({
         roles: ['Admin', 'Guru'],
       },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
+      meta: { layout: 'blank' },
+    },
   ],
 })
 

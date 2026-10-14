@@ -952,7 +952,13 @@ const selectStudent = async (student) => {
 
     const pdfUrl = URL.createObjectURL(pdfBlob)
 
-    window.open(pdfUrl, '_blank')
+    const pdfWindow = window.open(pdfUrl, '_blank')
+    if (pdfWindow) {
+      window.setTimeout(() => URL.revokeObjectURL(pdfUrl), 60000)
+    } else {
+      URL.revokeObjectURL(pdfUrl)
+      alert('Popup diblokir browser. Izinkan popup untuk membuka kartu PDF.')
+    }
 
     closeStudentModal()
   } catch (error) {
@@ -1060,7 +1066,6 @@ const generateBulk = async () => {
       }
     }
 
-    console.log('Payload kartu bulk:', payload)
 
     const response = await api.post(
       '/api/siswa/kartu-qr/bulk',
@@ -1076,7 +1081,14 @@ const generateBulk = async () => {
 
     const pdfUrl = URL.createObjectURL(pdfBlob)
 
-    window.open(pdfUrl, '_blank')
+    const pdfWindow = window.open(pdfUrl, '_blank')
+    if (pdfWindow) {
+      window.setTimeout(() => URL.revokeObjectURL(pdfUrl), 60000)
+    } else {
+      URL.revokeObjectURL(pdfUrl)
+      bulkError.value = 'Popup diblokir browser. Izinkan popup untuk membuka PDF.'
+      return
+    }
 
     closeBulkModal()
   } catch (error) {

@@ -215,6 +215,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { login } from '../services/auth'
+import { setCurrentUser } from '../services/authState'
 
 const router = useRouter()
 
@@ -237,6 +238,8 @@ const handleLogin = async () => {
     const user = await login(username.value, password.value)
 
     localStorage.setItem('token', user.token)
+    // Cache the profile only if the login response itself contains user-role fields.
+    if (user.peran_id_str || user.peran || user.role) setCurrentUser(user, user.token)
 
     router.push('/dashboard')
   } catch (error) {
