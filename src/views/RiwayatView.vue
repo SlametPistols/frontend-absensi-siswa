@@ -717,385 +717,62 @@
     </section>
 
     <!-- Summary -->
-
     <section
-
       v-if="summary"
-
-      class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5"
-
+      class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6"
     >
-
-      <!-- Total -->
-
-      <div
-
-        class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
-
+      <!-- Total: klik untuk menghapus filter status/keterangan -->
+      <button
+        type="button"
+        @click="filterByStatus('', '')"
+        :disabled="loading"
+        class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:border-indigo-300 hover:bg-indigo-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5"
+        aria-label="Tampilkan semua status absensi"
       >
-
-        <div class="flex items-start justify-between gap-3">
-
-          <div>
-
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
-
-              Total
-
-            </p>
-
-            <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-
-              {{ summary.total_siswa }}
-
-            </p>
-
-            <p class="mt-1 text-xs text-slate-400">
-
-              Data siswa
-
-            </p>
-
-          </div>
-
-          <div
-
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-600"
-
-          >
-
-            <svg
-
-              xmlns="http://www.w3.org/2000/svg"
-
-              class="h-5 w-5"
-
-              fill="none"
-
-              viewBox="0 0 24 24"
-
-              stroke="currentColor"
-
-              stroke-width="1.8"
-
-            >
-
-              <path
-
-                stroke-linecap="round"
-
-                stroke-linejoin="round"
-
-                d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
-
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
+        <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Total</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.total_siswa }}</p>
+        <p class="mt-1 text-xs text-slate-400">Semua status</p>
+      </button>
 
       <!-- Hadir -->
-
-      <div
-
-        class="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5"
-
-      >
-
-        <div class="flex items-start justify-between gap-3">
-
-          <div>
-
-            <p class="text-xs font-semibold uppercase tracking-wide text-emerald-600">
-
-              Hadir
-
-            </p>
-
-            <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-
-              {{ summary.hadir }}
-
-            </p>
-
-            <p class="mt-1 text-xs text-slate-400">
-
-              Kehadiran normal
-
-            </p>
-
-          </div>
-
-          <div
-
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600"
-
-          >
-
-            <svg
-
-              xmlns="http://www.w3.org/2000/svg"
-
-              class="h-5 w-5"
-
-              fill="none"
-
-              viewBox="0 0 24 24"
-
-              stroke="currentColor"
-
-              stroke-width="2"
-
-            >
-
-              <path
-
-                stroke-linecap="round"
-
-                stroke-linejoin="round"
-
-                d="M5 13l4 4L19 7"
-
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
+      <button type="button" @click="filterByStatus('Hadir')" :disabled="loading"
+        class="rounded-2xl border border-emerald-100 bg-white p-4 text-left shadow-sm transition hover:border-emerald-300 hover:bg-emerald-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5">
+        <p class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Hadir</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.hadir }}</p>
+        <p class="mt-1 text-xs text-slate-400">Kehadiran normal</p>
+      </button>
 
       <!-- Terlambat -->
-
-      <div
-
-        class="rounded-2xl border border-amber-100 bg-white p-4 shadow-sm sm:p-5"
-
-      >
-
-        <div class="flex items-start justify-between gap-3">
-
-          <div>
-
-            <p class="text-xs font-semibold uppercase tracking-wide text-amber-600">
-
-              Terlambat
-
-            </p>
-
-            <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-
-              {{ summary.terlambat }}
-
-            </p>
-
-            <p class="mt-1 text-xs text-slate-400">
-
-              Hadir terlambat
-
-            </p>
-
-          </div>
-
-          <div
-
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600"
-
-          >
-
-            <svg
-
-              xmlns="http://www.w3.org/2000/svg"
-
-              class="h-5 w-5"
-
-              fill="none"
-
-              viewBox="0 0 24 24"
-
-              stroke="currentColor"
-
-              stroke-width="1.8"
-
-            >
-
-              <circle
-
-                cx="12"
-
-                cy="12"
-
-                r="9"
-
-              />
-
-              <path
-
-                stroke-linecap="round"
-
-                stroke-linejoin="round"
-
-                d="M12 7v5l3 2"
-
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Izin / Sakit -->
-
-      <div
-
-        class="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm sm:p-5"
-
-      >
-
-        <div class="flex items-start justify-between gap-3">
-
-          <div>
-
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">
-
-              Izin / Sakit
-
-            </p>
-
-            <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-
-              {{ summary.izin + summary.sakit }}
-
-            </p>
-
-            <p class="mt-1 text-xs text-slate-400">
-
-              Ketidakhadiran resmi
-
-            </p>
-
-          </div>
-
-          <div
-
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600"
-
-          >
-
-            <svg
-
-              xmlns="http://www.w3.org/2000/svg"
-
-              class="h-5 w-5"
-
-              fill="none"
-
-              viewBox="0 0 24 24"
-
-              stroke="currentColor"
-
-              stroke-width="1.8"
-
-            >
-
-              <path
-
-                stroke-linecap="round"
-
-                stroke-linejoin="round"
-
-                d="M9 12h6M9 16h6M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"
-
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Tidak Hadir -->
-
-      <div
-
-        class="rounded-2xl border border-red-100 bg-white p-4 shadow-sm sm:p-5"
-
-      >
-
-        <div class="flex items-start justify-between gap-3">
-
-          <div>
-
-            <p class="text-xs font-semibold uppercase tracking-wide text-red-600">
-
-              Tidak Hadir
-
-            </p>
-
-            <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-
-              {{ summary.tidak_hadir }}
-
-            </p>
-
-            <p class="mt-1 text-xs text-slate-400">
-
-              Tanpa keterangan
-
-            </p>
-
-          </div>
-
-          <div
-
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600"
-
-          >
-
-            <svg
-
-              xmlns="http://www.w3.org/2000/svg"
-
-              class="h-5 w-5"
-
-              fill="none"
-
-              viewBox="0 0 24 24"
-
-              stroke="currentColor"
-
-              stroke-width="1.8"
-
-            >
-
-              <path
-
-                stroke-linecap="round"
-
-                stroke-linejoin="round"
-
-                d="M6 6l12 12M18 6L6 18"
-
-              />
-
-            </svg>
-
-          </div>
-
-        </div>
-
-      </div>
-
+      <button type="button" @click="filterByStatus('Terlambat')" :disabled="loading"
+        class="rounded-2xl border border-amber-100 bg-white p-4 text-left shadow-sm transition hover:border-amber-300 hover:bg-amber-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5">
+        <p class="text-xs font-semibold uppercase tracking-wide text-amber-600">Terlambat</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.terlambat }}</p>
+        <p class="mt-1 text-xs text-slate-400">Hadir terlambat</p>
+      </button>
+
+      <!-- Izin -->
+      <button type="button" @click="filterByStatus('Tidak Hadir', 'Izin')" :disabled="loading"
+        class="rounded-2xl border border-blue-100 bg-white p-4 text-left shadow-sm transition hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5">
+        <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Izin</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.izin }}</p>
+        <p class="mt-1 text-xs text-slate-400">Tidak hadir dengan izin</p>
+      </button>
+
+      <!-- Sakit -->
+      <button type="button" @click="filterByStatus('Tidak Hadir', 'Sakit')" :disabled="loading"
+        class="rounded-2xl border border-purple-100 bg-white p-4 text-left shadow-sm transition hover:border-purple-300 hover:bg-purple-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5">
+        <p class="text-xs font-semibold uppercase tracking-wide text-purple-600">Sakit</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.sakit }}</p>
+        <p class="mt-1 text-xs text-slate-400">Tidak hadir karena sakit</p>
+      </button>
+
+      <!-- Alpha -->
+      <button type="button" @click="filterByStatus('Tidak Hadir', 'Alpha')" :disabled="loading"
+        class="rounded-2xl border border-red-100 bg-white p-4 text-left shadow-sm transition hover:border-red-300 hover:bg-red-50/50 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:p-5">
+        <p class="text-xs font-semibold uppercase tracking-wide text-red-600">Alpha</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-slate-900">{{ summary.tidak_hadir }}</p>
+        <p class="mt-1 text-xs text-slate-400">Tanpa keterangan</p>
+      </button>
     </section>
 
     <!-- Table -->
@@ -1950,42 +1627,76 @@
 
     </section>
 
-
     <!-- Modal Edit Absensi -->
+
     <div v-if="editingAttendance" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4" @click.self="closeEditModal">
+
       <section class="w-full max-w-lg rounded-2xl bg-white shadow-xl">
+
         <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
+
           <div>
+
             <h2 class="text-lg font-bold text-slate-900">Edit Absensi</h2>
+
             <p class="mt-1 text-sm text-slate-500">{{ editingAttendance.nama }}</p>
+
           </div>
+
           <button type="button" @click="closeEditModal" :disabled="savingEdit" class="rounded-lg px-3 py-1 text-xl text-slate-400 hover:bg-slate-100 disabled:opacity-50" aria-label="Tutup">×</button>
+
         </div>
+
         <form class="space-y-5 p-5 sm:p-6" @submit.prevent="saveEditAttendance">
+
           <div>
+
             <label class="mb-2 block text-sm font-semibold text-slate-700">Status kehadiran</label>
+
             <select v-model="editForm.status" @change="handleEditStatusChange" required class="w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+
               <option value="Hadir">Hadir</option>
+
               <option value="Terlambat">Terlambat</option>
+
               <option value="Tidak Hadir">Tidak Hadir</option>
+
             </select>
+
           </div>
+
           <div v-if="editForm.status === 'Tidak Hadir'">
+
             <label class="mb-2 block text-sm font-semibold text-slate-700">Keterangan</label>
+
             <select v-model="editForm.keterangan" required class="w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+
               <option value="">Pilih keterangan</option>
+
               <option value="Izin">Izin</option>
+
               <option value="Sakit">Sakit</option>
+
               <option value="Alpha">Alpha</option>
+
             </select>
+
           </div>
+
           <div v-if="editError" class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ editError }}</div>
+
           <div class="flex flex-col-reverse gap-2 border-t border-slate-100 pt-4 sm:flex-row sm:justify-end">
+
             <button type="button" @click="closeEditModal" :disabled="savingEdit" class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50 disabled:opacity-50">Batal</button>
+
             <button type="submit" :disabled="savingEdit || (editForm.status === 'Tidak Hadir' && !editForm.keterangan)" class="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60">{{ savingEdit ? 'Menyimpan...' : 'Simpan Perubahan' }}</button>
+
           </div>
+
         </form>
+
       </section>
+
     </div>
 
   </div>
@@ -2013,9 +1724,13 @@ const deletingId = ref('')
 const deleteError = ref('')
 
 const sendingWhatsAppId = ref('')
+
 const editingAttendance = ref(null)
+
 const savingEdit = ref(false)
+
 const editError = ref('')
+
 const editForm = ref({ status: 'Hadir', keterangan: '' })
 
 const currentPage = ref(1)
@@ -2153,70 +1868,115 @@ const fetchAttendance = async () => {
 }
 
 const handleEditAttendance = (row) => {
+
   if (!row?.absensi_id) {
+
     window.alert('ID absensi tidak ditemukan. Data ini tidak bisa diedit.')
+
     return
+
   }
 
   editingAttendance.value = row
+
   editError.value = ''
 
   const status = row.status || ''
+
   const isAbsent = ['Tidak Hadir', 'Izin', 'Sakit', 'Alpha', 'Alfa'].includes(status)
 
   editForm.value = {
+
     status: isAbsent ? 'Tidak Hadir' : (['Hadir', 'Terlambat'].includes(status) ? status : 'Hadir'),
+
     keterangan: ['Izin', 'Sakit', 'Alpha', 'Alfa'].includes(status)
+
       ? (status === 'Alfa' ? 'Alpha' : status)
+
       : (row.keterangan === 'Alfa' ? 'Alpha' : (row.keterangan || '')),
+
   }
+
 }
 
 const handleEditStatusChange = () => {
+
   if (editForm.value.status !== 'Tidak Hadir') {
+
     editForm.value.keterangan = ''
+
   } else if (!editForm.value.keterangan) {
+
     editForm.value.keterangan = 'Alpha'
+
   }
+
 }
 
 const closeEditModal = () => {
+
   if (savingEdit.value) return
+
   editingAttendance.value = null
+
   editError.value = ''
+
 }
 
 const saveEditAttendance = async () => {
+
   const row = editingAttendance.value
+
   if (!row?.absensi_id || savingEdit.value) return
 
   if (editForm.value.status === 'Tidak Hadir' && !editForm.value.keterangan) {
+
     editError.value = 'Pilih keterangan Izin, Sakit, atau Alpha.'
+
     return
+
   }
 
   const payload = { status: editForm.value.status }
+
   if (editForm.value.status === 'Tidak Hadir') {
+
     payload.keterangan = editForm.value.keterangan
+
   }
 
   savingEdit.value = true
+
   editError.value = ''
 
   try {
+
     await api.put(`/api/absensi/${row.absensi_id}`, payload)
+
     editingAttendance.value = null
+
     await fetchAttendance()
+
     window.alert('Perubahan absensi berhasil disimpan.')
+
   } catch (error) {
+
     console.error('Gagal mengedit absensi:', error)
+
     editError.value =
+
       error.response?.data?.message ||
+
       error.response?.data?.error ||
+
       'Gagal menyimpan perubahan absensi. Periksa koneksi atau hak akses akun.'
+
   } finally {
+
     savingEdit.value = false
+
   }
+
 }
 
 const handleSendWhatsApp = async (row) => {
@@ -2333,6 +2093,13 @@ const applyFilters = async () => {
 
   await fetchAttendance()
 
+}
+
+const filterByStatus = async (status, keterangan = '') => {
+  filters.value.status = status
+  filters.value.keterangan = keterangan
+  currentPage.value = 1
+  await fetchAttendance()
 }
 
 const resetFilters = async () => {
