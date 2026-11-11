@@ -72,36 +72,19 @@
         class="flex h-16 shrink-0 items-center overflow-hidden border-b border-slate-100 px-6"
         :class="sidebarCollapsed ? 'md:justify-center md:px-0' : ''"
       >
-        <div
-          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-600"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="1.8"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-          </svg>
-        </div>
+        <!-- GANTI LOGO DI SINI -->
+        <img
+          src="/logo.png"
+          alt="Logo SDN 2 Garumukti"
+          class="h-10 w-10 shrink-0 object-contain"
+        />
 
         <div
           class="ml-3 min-w-0 whitespace-nowrap"
           :class="sidebarCollapsed ? 'md:hidden' : ''"
         >
           <p class="text-[15px] font-semibold tracking-tight text-slate-900">
-            SiAbsen
+            SDN 2 Garumukti
           </p>
 
           <p
@@ -477,7 +460,7 @@
             class="mb-5 flex items-center gap-1.5 text-xs text-slate-400"
             aria-label="Breadcrumb"
           >
-            <span>SiAbsen</span>
+            <span>SDN 2 Garumukti</span>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
