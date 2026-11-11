@@ -213,12 +213,12 @@
             </div>
           </div>
 
-          <!-- Ngrok URL -->
+          <!-- URL Server Dapodik -->
           <div>
             <label
               class="mb-2 block text-sm font-semibold text-slate-700"
             >
-              Ngrok URL
+              URL Server Dapodik
             </label>
 
             <div class="relative">
@@ -244,14 +244,14 @@
               <input
                 v-model="form.ngrok_url"
                 type="text"
-                placeholder="https://xxxx.ngrok-free.dev"
+                placeholder="https://server.sekolah.sch.id"
                 :disabled="syncing"
                 class="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
               />
             </div>
 
             <p class="mt-2 text-xs text-slate-400">
-              URL yang mengarah ke Web Service lokal Dapodik.
+              URL server Dapodik yang dapat diakses publik.
             </p>
           </div>
 
@@ -441,7 +441,7 @@
               </p>
 
               <p class="mt-1 text-xs leading-5 text-slate-500">
-                Isi NPSN, tipe data, URL Ngrok, dan token Dapodik.
+                Isi NPSN, tipe data, URL server, dan token Dapodik.
               </p>
             </div>
           </div>
@@ -509,7 +509,7 @@
               </svg>
 
               <p class="text-xs leading-5 text-amber-800">
-                Pastikan Web Service lokal Dapodik dan URL Ngrok sedang aktif
+                Pastikan URL server Dapodik sedang aktif dan dapat diakses
                 sebelum memulai sinkronisasi.
               </p>
             </div>
@@ -878,7 +878,7 @@ const startSync = async () => {
   }
 
   if (!form.value.ngrok_url) {
-    errorMessage.value = 'Ngrok URL wajib diisi.'
+    errorMessage.value = 'URL server Dapodik wajib diisi.'
     return
   }
 
