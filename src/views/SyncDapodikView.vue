@@ -251,7 +251,7 @@
             </div>
 
             <p class="mt-2 text-xs text-slate-400">
-              URL server Dapodik yang dapat diakses publik.
+              URL yang mengarah ke Web Service Dapodik.
             </p>
           </div>
 
