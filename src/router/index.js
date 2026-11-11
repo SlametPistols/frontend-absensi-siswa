@@ -8,6 +8,7 @@ import RiwayatView from '../views/RiwayatView.vue'
 import ManualAbsensiView from '../views/ManualAbsensiView.vue'
 import SyncDapodikView from '../views/SyncDapodikView.vue'
 import PengaturanWhatsAppView from '../views/PengaturanWhatsAppView.vue'
+import LaporanView from '../views/LaporanView.vue'
 import { loadCurrentUser, currentUser } from '../services/authState'
 
 const router = createRouter({
@@ -110,6 +111,18 @@ const router = createRouter({
         roles: ['Admin', 'Guru'],
       },
     },
+
+    {
+      path: '/laporan',
+      name: 'laporan',
+      component: LaporanView,
+      meta: {
+        layout: 'app',
+        requiresAuth: true,
+        roles: ['Admin', 'Guru', 'Kepala Sekolah'],
+      },
+    },
+
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
